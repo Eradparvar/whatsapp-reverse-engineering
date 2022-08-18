@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@adiwajshing/baileys": "^4.3.0",
+    "@adiwajshing/keyed-db": "github:adiwajshing/keyed-db",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "name": "bailesys_module",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "devDependencies": {
+    "typescript": "4.7.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
