@@ -32,7 +32,6 @@ const startSock = async () => {
 
     const sock = makeWASocket({
         version,
-        logger,
         printQRInTerminal: true,
         auth: state,
         msgRetryCounterMap,
