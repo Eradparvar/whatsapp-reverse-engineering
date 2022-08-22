@@ -2,6 +2,7 @@ import { Boom } from '@hapi/boom'
 import makeWASocket, { AnyMessageContent, delay, DisconnectReason, fetchLatestBaileysVersion, makeInMemoryStore, MessageRetryMap, useMultiFileAuthState, Browsers } from '@adiwajshing/baileys'
 import MAIN_LOGGER from '@adiwajshing/baileys/lib/Utils/logger'
 import fs from 'fs'
+import url from 'webdriverio/build/commands/browser/url'
 // import qrcode from '
 
 const logger = MAIN_LOGGER.child({})
@@ -127,16 +128,23 @@ const startSock = async () => {
             if (events['messages.upsert']) {
                 const upsert = events['messages.upsert']
                 console.log('recv messages ', JSON.stringify(upsert, undefined, 2))
+                // var productUrl = JSON.stringify(upsert, undefined, 2).toString().match(urlPattern);
+                console.log("***");
+                var urlRegex = /(http | ftp | https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
+                var res  = upsert.messages[0].message?.conversation?.match(urlRegex);
+                console.log(res);
+                console.log("***");
 
-                if (upsert.type === 'notify') {
-                    for (const msg of upsert.messages) {
-                        if (!msg.key.fromMe && doReplies) {
-                            console.log('replying to', msg.key.remoteJid)
-                            await sock!.readMessages([msg.key])
-                            // await sendMessageWTyping({ text: 'Hello there!' }, msg.key.remoteJid!)
-                        }
-                    }
-                }
+
+                // if (upsert.type === 'notify') {
+                //     for (const msg of upsert.messages) {
+                //         if (!msg.key.fromMe && doReplies) {
+                //             console.log('replying to', msg.key.remoteJid)
+                //             await sock!.readMessages([msg.key]);
+                //             // await sendMessageWTyping({ text: 'Hello there!' }, msg.key.remoteJid!)
+                //         }
+                //     }
+                // }
             }
 
             // messages updated like status delivered, message deleted etc.
